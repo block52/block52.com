@@ -1,0 +1,21 @@
+# DigitalOcean App Platform spec for block52.com (static site, no build step).
+# Create:  doctl apps create --spec .do/app.yaml --project-id <b52 project id>
+# Update:  doctl apps update <app id> --spec .do/app.yaml
+name: block52-website
+region: syd
+static_sites:
+  - name: web
+    github:
+      repo: block52/block52.com
+      branch: main
+      deploy_on_push: true
+    source_dir: /
+    index_document: index.html
+    error_document: 404.html
+domains:
+  - domain: block52.com
+    type: PRIMARY
+    zone: block52.com
+  - domain: www.block52.com
+    type: ALIAS
+    zone: block52.com

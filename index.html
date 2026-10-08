@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Block52 · Poker on its own blockchain</title>
+    <meta name="description" content="Block52 is a poker blockchain. Every action is a transaction, every hand can be replayed and checked, and your balance lives on chain in USDC." />
+    <meta name="theme-color" content="#0b1020" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://block52.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://block52.com/" />
+    <meta property="og:title" content="Block52 · Poker on its own blockchain" />
+    <meta property="og:description" content="Every action a transaction. Every hand replayable. Balances in USDC." />
+    <meta property="og:image" content="https://block52.com/logo512.png" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,700&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap"
+        rel="stylesheet"
+    />
+
+    <style>
+        :root {
+            --bg: #0b1020;
+            --bg-2: #111827;
+            --surface: #151d33;
+            --surface-2: #1a2639;
+            --line: rgba(148, 163, 255, 0.14);
+            --text: #eef1fb;
+            --muted: #a3acc7;
+            --faint: #6f7898;
+            --magenta: #c026d3;
+            --violet: #7c3aed;
+            --blue: #3b82f6;
+            --red: #e63950;
+            --card: #f6f1e7;
+            --ink: #111827;
+            --grad: linear-gradient(110deg, var(--magenta) 0%, var(--violet) 50%, var(--blue) 100%);
+            --radius: 16px;
+            --serif: "Fraunces", Georgia, "Times New Roman", serif;
+            --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+            --hand: "Caveat", "Comic Sans MS", cursive;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            /* The hero glow overhangs the viewport on purpose; never let it scroll sideways. */
+            overflow-x: clip;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 17px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: clip;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .wrap {
+            width: min(1160px, 100% - 32px);
+            margin-inline: auto;
+        }
+
+        .eyebrow {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition:
+                transform 0.15s ease,
+                box-shadow 0.2s ease,
+                background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: var(--grad);
+            color: #fff;
+            box-shadow: 0 10px 30px -10px rgba(124, 58, 237, 0.7);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 14px 36px -10px rgba(124, 58, 237, 0.9);
+        }
+
+        .btn-ghost {
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .grad-text {
+            background: var(--grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* ---------- Nav ---------- */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(14px);
+            background: rgba(11, 16, 32, 0.72);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 68px;
+            gap: 16px;
+        }
+
+        .nav-logo img {
+            height: 26px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-size: 15px;
+            color: var(--muted);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav .btn {
+            padding: 10px 18px;
+            font-size: 15px;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 96px 0 72px;
+            isolation: isolate;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: -20% -10% auto;
+            height: 720px;
+            z-index: -1;
+            background:
+                radial-gradient(40% 50% at 78% 40%, rgba(124, 58, 237, 0.28), transparent 70%),
+                radial-gradient(35% 45% at 15% 20%, rgba(192, 38, 211, 0.18), transparent 70%),
+                radial-gradient(45% 50% at 60% 90%, rgba(59, 130, 246, 0.16), transparent 70%);
+            /* Fade out instead of ending in a hard edge at the bottom of the hero. */
+            -webkit-mask-image: linear-gradient(#000 55%, transparent);
+            mask-image: linear-gradient(#000 55%, transparent);
+        }
+
+        .hero .wrap {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: clamp(48px, 7.2vw, 92px);
+            line-height: 1;
+            letter-spacing: -0.02em;
+            margin: 18px 0 26px;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 700;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .hero h1 em svg {
+            position: absolute;
+            left: 2%;
+            bottom: -0.16em;
+            width: 96%;
+            height: 0.28em;
+            overflow: visible;
+        }
+
+        .hero p.lead {
+            font-size: 19px;
+            color: var(--muted);
+            max-width: 34em;
+            margin: 0 0 34px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .hero-note {
+            margin-top: 22px;
+            font-size: 14px;
+            color: var(--faint);
+        }
+
+        /* Cards + chips illustration */
+        .table-art {
+            position: relative;
+            aspect-ratio: 1 / 0.9;
+            max-width: 480px;
+            justify-self: center;
+            width: 100%;
+        }
+
+        .playing-card {
+            position: absolute;
+            width: 46%;
+            aspect-ratio: 5 / 7;
+            border-radius: 14px;
+            background: var(--card);
+            color: var(--ink);
+            box-shadow:
+                0 30px 60px -20px rgba(0, 0, 0, 0.7),
+                inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+            font-family: var(--serif);
+            padding: 6% 7%;
+        }
+
+        .playing-card .corner {
+            font-weight: 700;
+            font-size: clamp(22px, 3vw, 34px);
+            line-height: 0.9;
+        }
+
+        .playing-card .pip {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            font-size: clamp(64px, 9vw, 110px);
+        }
+
+        .playing-card.red {
+            color: var(--red);
+        }
+
+        .card-a {
+            left: 8%;
+            top: 6%;
+            transform: rotate(-11deg);
+            animation: float-a 7s ease-in-out infinite;
+        }
+
+        .card-k {
+            left: 42%;
+            top: 2%;
+            transform: rotate(9deg);
+            animation: float-k 7s ease-in-out infinite;
+        }
+
+        @keyframes float-a {
+            50% {
+                transform: rotate(-9deg) translateY(-8px);
+            }
+        }
+
+        @keyframes float-k {
+            50% {
+                transform: rotate(11deg) translateY(-12px);
+            }
+        }
+
+        .chips {
+            position: absolute;
+            left: 14%;
+            right: 6%;
+            bottom: 2%;
+            display: flex;
+            align-items: flex-end;
+            gap: 4%;
+        }
+
+        .stack {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .chip {
+            width: clamp(54px, 7vw, 78px);
+            height: clamp(12px, 1.6vw, 17px);
+            border-radius: 50%;
+            margin-top: -6px;
+            background:
+                repeating-conic-gradient(from 0deg, #fff 0 12deg, transparent 12deg 45deg),
+                var(--c, var(--violet));
+            box-shadow:
+                inset 0 -3px 0 rgba(0, 0, 0, 0.25),
+                0 2px 0 rgba(0, 0, 0, 0.35);
+        }
+
+        .proof {
+            position: absolute;
+            right: -2%;
+            top: 58%;
+            background: rgba(21, 29, 51, 0.92);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 13px;
+            box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(6px);
+        }
+
+        .proof b {
+            display: block;
+            font-size: 14px;
+        }
+
+        .proof .ok {
+            color: #4ade80;
+            margin-right: 6px;
+        }
+
+        .proof code {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .scribble {
+            position: absolute;
+            left: -4%;
+            bottom: 30%;
+            font-family: var(--hand);
+            font-size: 26px;
+            color: #f0abfc;
+            transform: rotate(-6deg);
+        }
+
+        /* ---------- Fact strip ---------- */
+        .facts {
+            border-block: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .facts .wrap {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .fact {
+            padding: 26px 20px;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .fact + .fact {
+            border-left: 1px solid var(--line);
+        }
+
+        .fact .suit {
+            font-size: 26px;
+            line-height: 1;
+        }
+
+        .fact strong {
+            display: block;
+            font-size: 15px;
+        }
+
+        .fact span {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        /* ---------- Sections ---------- */
+        section.block {
+            padding: 110px 0;
+        }
+
+        .section-head {
+            max-width: 720px;
+            margin-bottom: 56px;
+        }
+
+        .section-head h2 {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: clamp(36px, 4.6vw, 56px);
+            line-height: 1.05;
+            letter-spacing: -0.015em;
+            margin: 12px 0 18px;
+        }
+
+        .section-head h2 em {
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .section-head p {
+            color: var(--muted);
+            margin: 0;
+            font-size: 18px;
+        }
+
+        /* Steps */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            counter-reset: step;
+        }
+
+        .step {
+            position: relative;
+            padding: 28px 24px;
+            border-radius: var(--radius);
+            background: var(--surface);
+            border: 1px solid var(--line);
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step, decimal-leading-zero);
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 40px;
+            line-height: 1;
+            display: block;
+            margin-bottom: 18px;
+        }
+
+        .step:nth-child(1)::before {
+            color: var(--magenta);
+        }
+
+        .step:nth-child(2)::before {
+            color: #a855f7;
+        }
+
+        .step:nth-child(3)::before {
+            color: var(--violet);
+        }
+
+        .step:nth-child(4)::before {
+            color: var(--blue);
+        }
+
+        .step h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+        }
+
+        .step p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature {
+            padding: 30px 28px;
+            border-radius: var(--radius);
+            background: linear-gradient(180deg, var(--surface) 0%, rgba(21, 29, 51, 0.4) 100%);
+            border: 1px solid var(--line);
+        }
+
+        .feature .icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 22px;
+            margin-bottom: 18px;
+            background: rgba(124, 58, 237, 0.14);
+            border: 1px solid rgba(124, 58, 237, 0.35);
+        }
+
+        .feature h3 {
+            margin: 0 0 8px;
+            font-size: 19px;
+        }
+
+        .feature p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .feature code {
+            font-size: 13px;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+
+        /* Formats */
+        .formats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .format {
+            position: relative;
+            overflow: hidden;
+            padding: 34px 30px 30px;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            background: var(--surface-2);
+        }
+
+        .format .big-suit {
+            position: absolute;
+            right: -10px;
+            top: -26px;
+            font-size: 150px;
+            line-height: 1;
+            opacity: 0.08;
+        }
+
+        .format h3 {
+            font-family: var(--serif);
+            font-size: 30px;
+            font-weight: 600;
+            margin: 0 0 6px;
+        }
+
+        .format .tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+            background: rgba(74, 222, 128, 0.12);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .format .tag.soon {
+            background: rgba(251, 191, 36, 0.1);
+            color: #fbbf24;
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+
+        .format p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* Node CTA */
+        .node {
+            border-radius: 24px;
+            padding: 56px;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background:
+                radial-gradient(60% 120% at 100% 0%, rgba(59, 130, 246, 0.25), transparent 60%),
+                radial-gradient(60% 120% at 0% 100%, rgba(192, 38, 211, 0.22), transparent 60%),
+                var(--surface);
+            border: 1px solid var(--line);
+        }
+
+        .node h2 {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: clamp(32px, 3.8vw, 46px);
+            line-height: 1.08;
+            margin: 10px 0 16px;
+        }
+
+        .node p {
+            color: var(--muted);
+            margin: 0 0 26px;
+        }
+
+        .terminal {
+            font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+            font-size: 13.5px;
+            line-height: 1.7;
+            background: #070b16;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 20px 22px;
+            color: #c7d2fe;
+            overflow-x: auto;
+        }
+
+        .terminal .dim {
+            color: var(--faint);
+        }
+
+        .terminal .g {
+            color: #4ade80;
+        }
+
+        /* Studio */
+        .studio {
+            text-align: center;
+            max-width: 760px;
+            margin-inline: auto;
+        }
+
+        .studio blockquote {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: clamp(26px, 3.2vw, 38px);
+            line-height: 1.25;
+            margin: 18px 0 24px;
+        }
+
+        .studio p {
+            color: var(--muted);
+        }
+
+        .studio a {
+            color: #f0abfc;
+        }
+
+        .suits-row {
+            font-size: 22px;
+            letter-spacing: 0.5em;
+        }
+
+        .suits-row .r {
+            color: var(--red);
+        }
+
+        /* Final CTA */
+        .final {
+            text-align: center;
+            padding: 120px 0 130px;
+            position: relative;
+            isolation: isolate;
+        }
+
+        .final::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(40% 60% at 50% 60%, rgba(124, 58, 237, 0.25), transparent 70%);
+        }
+
+        .final h2 {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: clamp(42px, 6vw, 76px);
+            line-height: 1;
+            margin: 0 0 18px;
+        }
+
+        .final h2 em {
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .final p {
+            color: var(--muted);
+            margin: 0 0 34px;
+            font-size: 18px;
+        }
+
+        .final .hero-ctas {
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 48px 0 40px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        footer .wrap {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        footer h4 {
+            color: var(--text);
+            font-size: 14px;
+            margin: 0 0 12px;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 8px;
+        }
+
+        footer a {
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--text);
+        }
+
+        footer .brand img {
+            height: 22px;
+            width: auto;
+            margin-bottom: 14px;
+        }
+
+        .legal {
+            grid-column: 1 / -1;
+            border-top: 1px solid var(--line);
+            padding-top: 22px;
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--faint);
+            font-size: 13px;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+            .hero .wrap,
+            .node {
+                grid-template-columns: 1fr;
+            }
+
+            .table-art {
+                max-width: 400px;
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features,
+            .formats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .facts .wrap {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .fact:nth-child(3) {
+                border-left: 0;
+            }
+
+            .fact:nth-child(n + 3) {
+                border-top: 1px solid var(--line);
+            }
+
+            footer .wrap {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            footer .brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 680px) {
+            body {
+                font-size: 16px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 56px 0 48px;
+            }
+
+            .steps,
+            .features,
+            .formats,
+            .facts .wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .fact + .fact {
+                border-left: 0;
+                border-top: 1px solid var(--line);
+            }
+
+            section.block {
+                padding: 72px 0;
+            }
+
+            .node {
+                padding: 32px 22px;
+            }
+
+            .proof {
+                right: 0;
+            }
+
+            .scribble {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .card-a,
+            .card-k {
+                animation: none;
+            }
+
+            .btn {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="nav">
+        <div class="wrap">
+            <a class="nav-logo" href="/" aria-label="Block52 home"><img src="/logo.svg" alt="Block52" width="114" height="26" /></a>
+            <nav class="nav-links" aria-label="Sections">
+                <a href="#how">How it works</a>
+                <a href="#features">Why on chain</a>
+                <a href="#formats">Games</a>
+                <a href="#nodes">Run a node</a>
+            </nav>
+            <a class="btn btn-primary" href="https://app.block52.xyz">Play now</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="wrap">
+                <div>
+                    <span class="eyebrow">♠ The poker blockchain</span>
+                    <h1>
+                        Every hand,<br />
+                        <em
+                            ><span class="grad-text">on the record.</span
+                            ><svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="u" x1="0" x2="1">
+                                        <stop offset="0" stop-color="#c026d3" />
+                                        <stop offset="1" stop-color="#3b82f6" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M4 14 C 70 4, 150 4, 296 10" fill="none" stroke="url(#u)" stroke-width="5" stroke-linecap="round" /></svg
+                        ></em>
+                    </h1>
+                    <p class="lead">
+                        Block52 is Texas Hold'em on its own chain. Every bet, call and fold is a transaction, every finished hand can be replayed by
+                        anyone, and your balance is held on chain in USDC, not in our database.
+                    </p>
+                    <div class="hero-ctas">
+                        <a class="btn btn-primary" href="https://app.block52.xyz">Take a seat <span aria-hidden="true">→</span></a>
+                        <a class="btn btn-ghost" href="#how">How it works</a>
+                    </div>
+                    <p class="hero-note">Cash games and Sit &amp; Gos running now · Open source · Independent validators</p>
+                </div>
+
+                <div class="table-art" aria-hidden="true">
+                    <div class="playing-card card-a">
+                        <div class="corner">A<br />♠</div>
+                        <div class="pip">♠</div>
+                    </div>
+                    <div class="playing-card red card-k">
+                        <div class="corner">K<br />♥</div>
+                        <div class="pip">♥</div>
+                    </div>
+                    <div class="chips">
+                        <div class="stack">
+                            <div class="chip" style="--c: #c026d3"></div>
+                            <div class="chip" style="--c: #c026d3"></div>
+                            <div class="chip" style="--c: #c026d3"></div>
+                            <div class="chip" style="--c: #c026d3"></div>
+                        </div>
+                        <div class="stack">
+                            <div class="chip" style="--c: #7c3aed"></div>
+                            <div class="chip" style="--c: #7c3aed"></div>
+                            <div class="chip" style="--c: #7c3aed"></div>
+                            <div class="chip" style="--c: #7c3aed"></div>
+                            <div class="chip" style="--c: #7c3aed"></div>
+                            <div class="chip" style="--c: #7c3aed"></div>
+                        </div>
+                        <div class="stack">
+                            <div class="chip" style="--c: #3b82f6"></div>
+                            <div class="chip" style="--c: #3b82f6"></div>
+                            <div class="chip" style="--c: #3b82f6"></div>
+                        </div>
+                        <div class="stack">
+                            <div class="chip" style="--c: #e63950"></div>
+                            <div class="chip" style="--c: #e63950"></div>
+                            <div class="chip" style="--c: #e63950"></div>
+                            <div class="chip" style="--c: #e63950"></div>
+                            <div class="chip" style="--c: #e63950"></div>
+                        </div>
+                    </div>
+                    <div class="proof">
+                        <b><span class="ok">✓</span>Hand #60 settled on chain</b>
+                        <code>replay: /table/0x64a6…?hand=60</code>
+                    </div>
+                    <div class="scribble">check it yourself ↘</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="facts">
+            <div class="wrap">
+                <div class="fact">
+                    <span class="suit">♠</span>
+                    <div><strong>Its own blockchain</strong><span>Built on Cosmos SDK</span></div>
+                </div>
+                <div class="fact">
+                    <span class="suit" style="color: var(--red)">♥</span>
+                    <div><strong>Balances in USDC</strong><span>Withdraw to Ethereum</span></div>
+                </div>
+                <div class="fact">
+                    <span class="suit" style="color: var(--red)">♦</span>
+                    <div><strong>Every hand replayable</strong><span>Shareable links</span></div>
+                </div>
+                <div class="fact">
+                    <span class="suit">♣</span>
+                    <div><strong>Open source</strong><span>Read the code</span></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="block" id="how">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">How it works</span>
+                    <h2>From deposit to river, <em>nothing off the books.</em></h2>
+                    <p>The game engine runs inside the chain itself. Validators agree on every action the same way a blockchain agrees on a payment.</p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <h3>Deposit</h3>
+                        <p>Send USDC to the bridge. The same amount is credited to your Block52 address on chain.</p>
+                    </div>
+                    <div class="step">
+                        <h3>Sit down</h3>
+                        <p>Pick a cash table or a Sit &amp; Go. Your buy-in moves from your balance to the table, on chain.</p>
+                    </div>
+                    <div class="step">
+                        <h3>Play</h3>
+                        <p>Each bet, call, check and fold is a signed transaction. The engine on every validator applies it and agrees on the result.</p>
+                    </div>
+                    <div class="step">
+                        <h3>Cash out</h3>
+                        <p>Leave the table and withdraw. A validator signs your withdrawal and the bridge pays out USDC on Ethereum.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="block" id="features" style="padding-top: 0">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">Why on chain</span>
+                    <h2>Trust the record, <em>not the room.</em></h2>
+                    <p>Online poker usually asks you to take the operator's word for it. On Block52 the record is public and anyone can check it.</p>
+                </div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="icon">🃏</div>
+                        <h3>Shuffles from the chain</h3>
+                        <p>Each deck is seeded from on-chain randomness the validators agree on, not from a server you can't see.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="icon">🔁</div>
+                        <h3>Replay any hand</h3>
+                        <p>Every finished hand opens read-only at its showdown. Share it with one link: <code>?hand=N</code></p>
+                    </div>
+                    <div class="feature">
+                        <div class="icon">🔎</div>
+                        <h3>Open explorer</h3>
+                        <p>Blocks, transactions, accounts and hand history are public. Look up any player or table.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="icon">💵</div>
+                        <h3>Your balance, on chain</h3>
+                        <p>Chips are USDC held at your own address. Your balance is chain state, readable by anyone.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="icon">🏆</div>
+                        <h3>Automatic payouts</h3>
+                        <p>Sit &amp; Go places and prizes are worked out by the engine and recorded on chain. Finishers claim their prize in one click.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="icon">🖼️</div>
+                        <h3>Bring your NFT</h3>
+                        <p>Link an NFT you own and it shows as your avatar at the table.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="block" id="formats" style="padding-top: 0">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">Games</span>
+                    <h2>Pick your <em>table.</em></h2>
+                </div>
+                <div class="formats">
+                    <div class="format">
+                        <span class="big-suit" aria-hidden="true">♠</span>
+                        <span class="tag">Live</span>
+                        <h3>Cash games</h3>
+                        <p>No-limit Texas Hold'em. Buy in, top up, and leave whenever you like.</p>
+                    </div>
+                    <div class="format">
+                        <span class="big-suit" aria-hidden="true" style="color: var(--red)">♥</span>
+                        <span class="tag">Live</span>
+                        <h3>Sit &amp; Go</h3>
+                        <p>Fixed buy-in, starts when the table fills, blinds rise on a clock. The top finishers are paid automatically.</p>
+                    </div>
+                    <div class="format">
+                        <span class="big-suit" aria-hidden="true" style="color: var(--red)">♦</span>
+                        <span class="tag soon">Coming</span>
+                        <h3>Tournaments</h3>
+                        <p>Multi-table tournaments with table balancing, run by the chain from first hand to final table.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="block" id="nodes" style="padding-top: 0">
+            <div class="wrap">
+                <div class="node">
+                    <div>
+                        <span class="eyebrow">Run a node</span>
+                        <h2>Don't trust us. <span class="grad-text">Run the chain.</span></h2>
+                        <p>Anyone can run a Block52 node, follow every hand as it's played, and apply to become a validator. The node portal has the genesis, peers and step-by-step setup.</p>
+                        <div class="hero-ctas">
+                            <a class="btn btn-primary" href="https://app.block52.xyz/nodes">Node portal</a>
+                            <a class="btn btn-ghost" href="https://github.com/block52/pokerchain">pokerchain on GitHub</a>
+                        </div>
+                    </div>
+                    <pre class="terminal" aria-label="Example node setup"><span class="dim">$</span> pokerchaind init my-node --chain-id pokerchain
+<span class="dim">$</span> pokerchaind start
+<span class="dim">…</span>
+<span class="g">INF</span> committed state height=471167
+<span class="g">INF</span> indexed block events=hand_completed</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="block" style="padding-top: 0">
+            <div class="wrap studio">
+                <div class="suits-row" aria-hidden="true">♠<span class="r">♥</span><span class="r">♦</span>♣</div>
+                <blockquote>"We're not developers who read about poker. We're players who learned to code."</blockquote>
+                <p>
+                    Block52 is built in Australia by <a href="https://ninehighstudios.com">9 High Studios</a>, who also build white-label poker
+                    platforms for operators and clubs.
+                </p>
+            </div>
+        </section>
+
+        <section class="final">
+            <div class="wrap">
+                <h2>Your seat is <em class="grad-text">open.</em></h2>
+                <p>Make a wallet in seconds. No email, no username.</p>
+                <div class="hero-ctas">
+                    <a class="btn btn-primary" href="https://app.block52.xyz">Play now <span aria-hidden="true">→</span></a>
+                    <a class="btn btn-ghost" href="https://app.block52.xyz/explorer">Explore the chain</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <div class="brand">
+                <img src="/logo.svg" alt="Block52" width="96" height="22" />
+                <p>Poker on its own blockchain.</p>
+            </div>
+            <div>
+                <h4>Play</h4>
+                <ul>
+                    <li><a href="https://app.block52.xyz">Tables</a></li>
+                    <li><a href="https://app.block52.xyz/hands">My hands</a></li>
+                    <li><a href="https://app.block52.xyz/players">Players</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Chain</h4>
+                <ul>
+                    <li><a href="https://app.block52.xyz/explorer">Explorer</a></li>
+                    <li><a href="https://app.block52.xyz/nodes">Run a node</a></li>
+                    <li><a href="https://app.block52.xyz/tech-notes">Tech notes</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Build</h4>
+                <ul>
+                    <li><a href="https://github.com/block52">GitHub</a></li>
+                    <li><a href="https://ninehighstudios.com">9 High Studios</a></li>
+                </ul>
+            </div>
+            <div class="legal">
+                <span>© <span id="y">2026</span> Block52 · Built in Australia</span>
+                <span>Play responsibly. Online poker may be restricted where you live.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
