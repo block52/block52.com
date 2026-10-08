@@ -1,4 +1,6 @@
-# DigitalOcean App Platform spec for block52.com (static site, no build step).
+# DigitalOcean App Platform spec for the Block52 landing page (static site, no build step).
+# Served at block52.xyz and www.block52.xyz (DNS is in DigitalOcean). block52.com can be
+# added once it's redeemed and its nameservers point at DigitalOcean.
 # Create:  doctl apps create --spec .do/app.yaml --project-id <b52 project id>
 # Update:  doctl apps update <app id> --spec .do/app.yaml
 name: block52-website
@@ -13,9 +15,9 @@ static_sites:
     index_document: index.html
     error_document: 404.html
 domains:
-  - domain: block52.com
+  - domain: block52.xyz
     type: PRIMARY
-    zone: block52.com
-  - domain: www.block52.com
+    zone: block52.xyz
+  - domain: www.block52.xyz
     type: ALIAS
-    zone: block52.com
+    zone: block52.xyz

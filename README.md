@@ -25,6 +25,8 @@ doctl projects list                       # find the b52 project id
 doctl apps create --spec .do/app.yaml --project-id <b52-project-id>
 ```
 
-`block52.com` and `www.block52.com` are declared in the spec with `zone: block52.com`. If the domain's DNS is hosted in DigitalOcean (nameservers `ns1/ns2/ns3.digitalocean.com`), App Platform creates the records and the TLS certificate itself.
+The site is served at `block52.xyz` and `www.block52.xyz`, declared in the spec with `zone: block52.xyz`. That zone's DNS is in DigitalOcean, so App Platform creates the records and the TLS certificate itself. Any old apex or `www` records must be removed first; they pointed at Vercel.
+
+`block52.com` can be added the same way once it's redeemed and its nameservers point at DigitalOcean.
 
 Links on the page point to the app at `https://app.block52.xyz`.
