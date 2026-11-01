@@ -3,18 +3,61 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Block52 · Poker on its own blockchain</title>
-    <meta name="description" content="Block52 is a poker blockchain. Every action is a transaction, every hand can be replayed and checked, and your balance lives on chain in USDC." />
+    <title>Block52 · On-chain Texas Hold'em poker protocol</title>
+    <meta name="description" content="Block52 is an open-source poker protocol on its own Cosmos SDK chain, written in Go. Play Texas Hold'em in USDC and replay every hand on chain." />
     <meta name="theme-color" content="#0b1020" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href="https://block52.xyz/" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Block52" />
+    <meta property="og:locale" content="en_AU" />
     <meta property="og:url" content="https://block52.xyz/" />
-    <meta property="og:title" content="Block52 · Poker on its own blockchain" />
-    <meta property="og:description" content="Every action a transaction. Every hand replayable. Balances in USDC." />
-    <meta property="og:image" content="https://block52.xyz/logo512.png" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:title" content="Block52 · Every hand, on the record" />
+    <meta property="og:description" content="Texas Hold'em on its own Cosmos chain. Every action a transaction, every hand replayable, balances in USDC. Open source, written in Go." />
+    <meta property="og:image" content="https://block52.xyz/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Block52: Every hand, on the record." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Block52 · Every hand, on the record" />
+    <meta name="twitter:description" content="Texas Hold'em on its own Cosmos chain. Every hand replayable, balances in USDC." />
+    <meta name="twitter:image" content="https://block52.xyz/og-image.png" />
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "Organization",
+                    "@id": "https://block52.xyz/#org",
+                    "name": "Block52",
+                    "url": "https://block52.xyz/",
+                    "logo": "https://block52.xyz/logo-wordmark.png",
+                    "sameAs": ["https://github.com/block52"],
+                    "parentOrganization": { "@type": "Organization", "name": "Nine High Studios", "url": "https://ninehighstudios.com" }
+                },
+                {
+                    "@type": "WebSite",
+                    "@id": "https://block52.xyz/#website",
+                    "url": "https://block52.xyz/",
+                    "name": "Block52",
+                    "publisher": { "@id": "https://block52.xyz/#org" }
+                },
+                {
+                    "@type": "SoftwareApplication",
+                    "name": "Block52",
+                    "url": "https://app.block52.xyz",
+                    "applicationCategory": "GameApplication",
+                    "operatingSystem": "Web",
+                    "description": "Texas Hold'em cash games and Sit & Gos on an open-source Cosmos SDK poker chain, with balances in USDC.",
+                    "publisher": { "@id": "https://block52.xyz/#org" }
+                }
+            ]
+        }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -155,7 +198,7 @@
         }
 
         .nav-logo img {
-            height: 26px;
+            height: 34px;
             width: auto;
         }
 
@@ -732,7 +775,7 @@
         }
 
         footer .brand img {
-            height: 22px;
+            height: 28px;
             width: auto;
             margin-bottom: 14px;
         }
@@ -1162,7 +1205,7 @@
 <body>
     <header class="nav">
         <div class="wrap">
-            <a class="nav-logo" href="/" aria-label="Block52 home"><img src="/logo.svg" alt="Block52" width="114" height="26" /></a>
+            <a class="nav-logo" href="/" aria-label="Block52 home"><img src="/logo-wordmark.png" alt="Block52" width="159" height="34" /></a>
             <nav class="nav-links" aria-label="Sections">
                 <a href="#protocol">Protocol</a>
                 <a href="#how">How it works</a>
@@ -1619,7 +1662,7 @@ sc.<span class="k">AssertLegal</span>(<span class="s">"BB"</span>, <span class="
     <footer>
         <div class="wrap">
             <div class="brand">
-                <img src="/logo.svg" alt="Block52" width="96" height="22" />
+                <img src="/logo-wordmark.png" alt="Block52" width="131" height="28" />
                 <p>Poker on its own blockchain.</p>
             </div>
             <div>

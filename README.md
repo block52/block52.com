@@ -4,7 +4,11 @@ The Block52 landing page: plain HTML and CSS, no build step.
 
 - `index.html`: the page (styles inline; Google Fonts: Fraunces, Inter, Caveat)
 - `404.html`: not-found page
-- `logo.svg`, `favicon.svg`, `logo512.png`: brand assets, copied from `block52/ui/public`
+- `logo-wordmark.png` (from `block52/ui/public/logo1080.png`, the app header's wordmark) and `favicon.svg` (`ui/public/b52favicon.svg`): brand assets
+- `apple-touch-icon.png`: the favicon on the page background, 180×180
+- `og-image.png`: 1200×630 social share card
+- `hand-14.webp`: a real replay, hand #14 of table `0x43a2…2920`
+- `robots.txt`, `sitemap.xml`: crawl hints (bump `lastmod` when the page changes)
 - `.do/app.yaml`: DigitalOcean App Platform spec (a static site that deploys on every push to `main`)
 
 ## Preview locally
