@@ -3,18 +3,62 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Block52 · Poker on its own blockchain</title>
-    <meta name="description" content="Block52 is a poker blockchain. Every action is a transaction, every hand can be replayed and checked, and your balance lives on chain in USDC." />
+    <title>Block52 · On-chain Texas Hold'em poker protocol</title>
+    <meta name="description" content="Block52 is an open-source poker protocol on its own Cosmos SDK chain, written in Go. Play Texas Hold'em in USDC and replay every hand on chain." />
     <meta name="theme-color" content="#0b1020" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href="https://block52.xyz/" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Block52" />
+    <meta property="og:locale" content="en_AU" />
     <meta property="og:url" content="https://block52.xyz/" />
-    <meta property="og:title" content="Block52 · Poker on its own blockchain" />
-    <meta property="og:description" content="Every action a transaction. Every hand replayable. Balances in USDC." />
-    <meta property="og:image" content="https://block52.xyz/logo512.png" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:title" content="Block52 · Every hand, on the record" />
+    <meta property="og:description" content="Texas Hold'em on its own Cosmos chain. Every action a transaction, every hand replayable, balances in USDC. Open source, written in Go." />
+    <meta property="og:image" content="https://block52.xyz/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Block52: Every hand, on the record." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@block52xyz" />
+    <meta name="twitter:title" content="Block52 · Every hand, on the record" />
+    <meta name="twitter:description" content="Texas Hold'em on its own Cosmos chain. Every hand replayable, balances in USDC." />
+    <meta name="twitter:image" content="https://block52.xyz/og-image.png" />
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "Organization",
+                    "@id": "https://block52.xyz/#org",
+                    "name": "Block52",
+                    "url": "https://block52.xyz/",
+                    "logo": "https://block52.xyz/logo-wordmark.png",
+                    "sameAs": ["https://x.com/block52xyz", "https://github.com/block52"],
+                    "parentOrganization": { "@type": "Organization", "name": "Nine High Studios", "url": "https://ninehighstudios.com" }
+                },
+                {
+                    "@type": "WebSite",
+                    "@id": "https://block52.xyz/#website",
+                    "url": "https://block52.xyz/",
+                    "name": "Block52",
+                    "publisher": { "@id": "https://block52.xyz/#org" }
+                },
+                {
+                    "@type": "SoftwareApplication",
+                    "name": "Block52",
+                    "url": "https://app.block52.xyz",
+                    "applicationCategory": "GameApplication",
+                    "operatingSystem": "Web",
+                    "description": "Texas Hold'em cash games, Sit & Gos and scheduled tournaments on an open-source Cosmos SDK poker chain, with balances in USDC.",
+                    "publisher": { "@id": "https://block52.xyz/#org" }
+                }
+            ]
+        }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -155,7 +199,7 @@
         }
 
         .nav-logo img {
-            height: 26px;
+            height: 34px;
             width: auto;
         }
 
@@ -689,43 +733,11 @@
         }
 
         /* Final CTA */
-        .final {
-            text-align: center;
-            padding: 120px 0 130px;
-            position: relative;
-            isolation: isolate;
-        }
 
-        .final::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            background: radial-gradient(40% 60% at 50% 60%, rgba(124, 58, 237, 0.25), transparent 70%);
-        }
 
-        .final h2 {
-            font-family: var(--serif);
-            font-weight: 500;
-            font-size: clamp(42px, 6vw, 76px);
-            line-height: 1;
-            margin: 0 0 18px;
-        }
 
-        .final h2 em {
-            font-style: italic;
-            font-weight: 700;
-        }
 
-        .final p {
-            color: var(--muted);
-            margin: 0 0 34px;
-            font-size: 18px;
-        }
 
-        .final .hero-ctas {
-            justify-content: center;
-        }
 
         /* Footer */
         footer {
@@ -764,7 +776,7 @@
         }
 
         footer .brand img {
-            height: 22px;
+            height: 28px;
             width: auto;
             margin-bottom: 14px;
         }
@@ -780,6 +792,316 @@
             gap: 12px;
             color: var(--faint);
             font-size: 13px;
+        }
+
+
+        /* ---------- Real hand ---------- */
+        .real-hand {
+            margin: 0 auto;
+            max-width: 980px;
+        }
+
+        .real-hand img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
+        }
+
+        .real-hand figcaption {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px 20px;
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .real-hand figcaption b {
+            color: var(--text);
+        }
+
+        .real-hand a {
+            color: var(--text);
+        }
+
+        .tag-real {
+            display: inline-block;
+            margin-right: 8px;
+            padding: 2px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #052e1c;
+            background: #34d399;
+        }
+
+        /* ---------- Protocol ---------- */
+        .protocol {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .spec {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: 0;
+            margin: 0;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .spec dt,
+        .spec dd {
+            margin: 0;
+            padding: 14px 18px;
+            border-top: 1px solid var(--line);
+            font-size: 15px;
+        }
+
+        .spec dt:first-of-type,
+        .spec dd:first-of-type {
+            border-top: 0;
+        }
+
+        .spec dt {
+            color: var(--faint);
+            background: rgba(21, 29, 51, 0.6);
+            font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+            font-size: 13px;
+            letter-spacing: 0.02em;
+        }
+
+        .spec dd {
+            color: var(--muted);
+        }
+
+        .spec dd b {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .code-stack {
+            display: grid;
+            gap: 16px;
+            min-width: 0;
+        }
+
+        .code-file {
+            margin: 0;
+            min-width: 0;
+        }
+
+        .code-file figcaption {
+            font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+            font-size: 12.5px;
+            color: var(--faint);
+            margin: 0 0 6px 4px;
+        }
+
+        .terminal .k {
+            color: #f0abfc;
+        }
+
+        .terminal .s {
+            color: #93c5fd;
+        }
+
+        .terminal .c {
+            color: var(--faint);
+            font-style: italic;
+        }
+
+        .proofs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .proof-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 22px 22px 20px;
+        }
+
+        .proof-card .num {
+            font-family: var(--serif);
+            font-size: clamp(30px, 3.6vw, 40px);
+            font-weight: 700;
+            line-height: 1.05;
+            color: var(--text);
+        }
+
+        .proof-card .num small {
+            font-size: 0.55em;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .proof-card p {
+            margin: 10px 0 0;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .proof-card code {
+            font-size: 12.5px;
+            color: var(--faint);
+        }
+
+        /* ---------- Distribution ---------- */
+        .dist {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 24px 20px 18px;
+        }
+
+        .dist-chart {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .dist-chart .grid {
+            stroke: rgba(148, 163, 255, 0.1);
+        }
+
+        .dist-chart .axis {
+            fill: var(--faint);
+            font: 11px var(--sans);
+        }
+
+        .dist-chart .rank {
+            fill: var(--muted);
+            font-weight: 600;
+        }
+
+        .dist-chart .bar {
+            fill: #a5b4fc;
+        }
+
+        .dist-chart .bar.red {
+            fill: var(--red);
+        }
+
+        .dist-chart .bar:hover {
+            fill: #fff;
+        }
+
+        .dist-chart .expected {
+            stroke: #fff;
+            stroke-width: 1.5;
+            stroke-dasharray: 6 5;
+            opacity: 0.8;
+        }
+
+        .dist-chart .exp-label {
+            fill: #fff;
+        }
+
+        .dist-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 22px;
+            margin-top: 10px;
+            color: var(--faint);
+            font-size: 13px;
+        }
+
+        .dist-legend i {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            margin-right: 6px;
+            vertical-align: -1px;
+        }
+
+        .chi {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .chi div {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 16px 18px;
+        }
+
+        .chi b {
+            display: block;
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        .chi span {
+            color: var(--muted);
+            font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+            font-size: 13px;
+        }
+
+        .chi .pass {
+            float: right;
+            color: #34d399;
+            font-family: var(--sans);
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 0.06em;
+        }
+
+        .dist-note {
+            margin-top: 16px;
+            color: var(--faint);
+            font-size: 14px;
+        }
+
+        .dist-note a {
+            color: var(--muted);
+        }
+
+        @media (max-width: 960px) {
+            .protocol {
+                grid-template-columns: 1fr;
+            }
+
+            .proofs,
+            .chi {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .dist {
+                padding: 16px 12px 12px;
+                overflow-x: auto;
+            }
+
+            .dist-chart {
+                min-width: 720px;
+            }
+
+            .spec {
+                grid-template-columns: 1fr;
+            }
+
+            .spec dd {
+                border-top: 0;
+                padding-top: 0;
+            }
         }
 
         /* ---------- Responsive ---------- */
@@ -884,8 +1206,9 @@
 <body>
     <header class="nav">
         <div class="wrap">
-            <a class="nav-logo" href="/" aria-label="Block52 home"><img src="/logo.svg" alt="Block52" width="114" height="26" /></a>
+            <a class="nav-logo" href="/" aria-label="Block52 home"><img src="/logo-wordmark.png" alt="Block52" width="159" height="34" /></a>
             <nav class="nav-links" aria-label="Sections">
+                <a href="#protocol">Protocol</a>
                 <a href="#how">How it works</a>
                 <a href="#features">Why on chain</a>
                 <a href="#formats">Games</a>
@@ -922,7 +1245,7 @@
                         <a class="btn btn-primary" href="https://app.block52.xyz">Take a seat <span aria-hidden="true">→</span></a>
                         <a class="btn btn-ghost" href="#how">How it works</a>
                     </div>
-                    <p class="hero-note">Cash games and Sit &amp; Gos running now · Open source · Independent validators</p>
+                    <p class="hero-note">Cash games, Sit &amp; Gos and tournaments running now · Open source · Independent validators</p>
                 </div>
 
                 <div class="table-art" aria-hidden="true">
@@ -991,6 +1314,218 @@
                 </div>
             </div>
         </div>
+
+        <section class="block" id="showdown">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">Showdown</span>
+                    <h2>Nine seats. <em>One record.</em></h2>
+                    <p>
+                        A real hand from a nine-player tournament on mainnet. Who showed, what they held, which five cards played and who
+                        took the pot are all written to the chain, so anyone can replay it afterwards.
+                    </p>
+                </div>
+                <figure class="real-hand">
+                    <img src="hand-14.webp" width="2000" height="1189" loading="lazy" alt="Block52 replay of hand 14 from a nine-player tournament: seat 2 holds three of diamonds and three of spades and wins 1,990 chips with a full house, threes over nines, on a board of 7 of clubs, 9 of hearts, 4 of clubs, 3 of hearts, 9 of spades, against ace-king of clubs." />
+                    <figcaption>
+                        <span><span class="tag-real">Real hand</span><b>Hand #14</b> of a nine-player tournament, 31 Oct 2026: 3♦3♠ all in, A♣K♣ calls, the river 9♠ makes threes full.</span>
+                        <a href="https://app.block52.xyz/table/0x43a299076e7434ec142f57ed198c94db1bcca01809d385034589e854967f2920?hand=14">Replay it on chain →</a>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="block" id="protocol">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">The protocol</span>
+                    <h2>Poker as a <em>protocol.</em></h2>
+                    <p>
+                        Block52 is not a poker site with a blockchain bolted on. It is an application-specific chain built on the Cosmos SDK
+                        and written in Go, with a validator model drawn from THORChain: independent operators bond stake to run the network,
+                        and the same validators sign every USDC withdrawal back to Ethereum. The poker engine runs inside every validator as a
+                        deterministic state machine. A product of <a href="https://ninehighstudios.com">Nine High Studios</a>.
+                    </p>
+                </div>
+
+                <div class="protocol">
+                    <dl class="spec">
+                        <dt>consensus</dt>
+                        <dd><b>CometBFT v0.38</b>: Byzantine fault-tolerant, instant finality. A hand is final the block it lands in.</dd>
+                        <dt>framework</dt>
+                        <dd><b>Cosmos SDK v0.53</b> with a custom <code>x/poker</code> module for tables, actions, payouts and the bridge.</dd>
+                        <dt>language</dt>
+                        <dd><b>Go 1.25</b>, chain and engine alike. One language from the felt to the state root.</dd>
+                        <dt>engine</dt>
+                        <dd><b>Embedded in-process</b>, pinned by Go module version. Every validator executes every action and must reach the same bytes.</dd>
+                        <dt>validators</dt>
+                        <dd><b>Bonded, independent operators</b>. Consensus-breaking releases ship through a coordinated halt so every node switches on the same block.</dd>
+                        <dt>settlement</dt>
+                        <dd><b>USDC</b>, bridged from Ethereum mainnet. Withdrawals are validator-signed and redeemed on Ethereum.</dd>
+                        <dt>clock</dt>
+                        <dd><b>Block time, never wall time</b>. Timeouts are a permissionless action, and the chain sweeps stalled turns itself in <code>EndBlock</code>.</dd>
+                    </dl>
+
+                    <div class="code-stack">
+                        <figure class="code-file">
+                            <figcaption>pokerchain/go.mod</figcaption>
+                            <pre class="terminal"><span class="k">module</span> github.com/block52/pokerchain
+
+<span class="k">go</span> 1.25.0
+
+<span class="k">require</span> (
+    github.com/cometbft/cometbft <span class="s">v0.38.21</span>
+    github.com/cosmos/cosmos-sdk <span class="s">v0.53.6</span>
+    <span class="c">// the poker engine is part of consensus:</span>
+    <span class="c">// every validator runs this exact version</span>
+    github.com/block52/poker-vm/pvm/go/engine <span class="s">v1.0.34</span>
+)</pre>
+                        </figure>
+                        <figure class="code-file">
+                            <figcaption>poker-scene-dsl · rules as readable tests</figcaption>
+                            <pre class="terminal">sc.<span class="k">Act</span>(
+    <span class="s">"SB posts small blind"</span>,
+    <span class="s">"BB posts big blind"</span>,
+    <span class="s">"deal"</span>,
+    <span class="s">"BTN raises to 3bb"</span>,
+    <span class="s">"SB folds"</span>,
+    <span class="s">"BB calls"</span>,
+)
+sc.<span class="k">AssertPot</span>(<span class="s">"650"</span>)
+sc.<span class="k">Rejects</span>(<span class="s">"BB checks"</span>)      <span class="c">// not BB's turn</span>
+sc.<span class="k">AssertLegal</span>(<span class="s">"BB"</span>, <span class="s">"check"</span>, <span class="s">"bet"</span>)</pre>
+                        </figure>
+                        <figure class="code-file">
+                            <figcaption>query any table, from any node</figcaption>
+                            <pre class="terminal"><span class="dim">$</span> curl -s $NODE/block52/pokerchain/poker/v1/game/0x43a2…2920 \
+    | jq <span class="s">'.game | fromjson | .gameState.results[-1]'</span>
+{ <span class="s">"place"</span>: 1, <span class="s">"playerId"</span>: <span class="s">"b521evpl…"</span>, <span class="s">"payout"</span>: <span class="s">"7200000"</span> }</pre>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="proofs">
+                    <div class="proof-card">
+                        <div class="num">10,000<small> / 10,000</small></div>
+                        <p>Real hands from the Pluribus dataset replayed through the engine, every finishing stack reproduced to the chip.</p>
+                    </div>
+                    <div class="proof-card">
+                        <div class="num">10.5M<small> calls</small></div>
+                        <p>Engine actions recorded and replayed old-against-new before the latest engine release. <b>0 regressions.</b></p>
+                    </div>
+                    <div class="proof-card">
+                        <div class="num">1<small> clock</small></div>
+                        <p>Block execution reads the block's time, never a validator's own <code>time.Now()</code>. Same input, same block, same bytes on every validator.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="block" id="fairness" style="padding-top: 0">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">Hand distribution</span>
+                    <h2>Every card, <em>counted.</em></h2>
+                    <p>
+                        Our <a href="https://github.com/block52/indexer">indexer</a>, a small open-source Go service (MIT), follows the chain
+                        block by block and tallies every card dealt on mainnet. Run it against your own node and you get the same counts. In a
+                        fair deck each of the 52 should turn up about as often as the others, give or take chance. Here are 6,723 of them.
+                    </p>
+                </div>
+                <div class="dist">
+<svg class="dist-chart" viewBox="0 0 1040 300" role="img" aria-labelledby="dist-title dist-desc">
+<title id="dist-title">Card distribution on Block52 mainnet</title>
+<desc id="dist-desc">How often each of the 52 cards has been dealt across 6,723 cards. Every card falls between 101 and 160 appearances around an expected 129.3.</desc>
+<line class="grid" x1="36" x2="1032" y1="260.0" y2="260.0"/><text class="axis" x="30" y="264.0" text-anchor="end">0</text>
+<line class="grid" x1="36" x2="1032" y1="204.9" y2="204.9"/><text class="axis" x="30" y="208.9" text-anchor="end">40</text>
+<line class="grid" x1="36" x2="1032" y1="149.8" y2="149.8"/><text class="axis" x="30" y="153.8" text-anchor="end">80</text>
+<line class="grid" x1="36" x2="1032" y1="94.7" y2="94.7"/><text class="axis" x="30" y="98.7" text-anchor="end">120</text>
+<line class="grid" x1="36" x2="1032" y1="39.6" y2="39.6"/><text class="axis" x="30" y="43.6" text-anchor="end">160</text>
+<rect class="bar" x="39.4" y="89.2" width="12.3" height="170.8" rx="1.5"><title>2♠: 124</title></rect>
+<rect class="bar red" x="58.6" y="80.9" width="12.3" height="179.1" rx="1.5"><title>2♥: 130</title></rect>
+<rect class="bar red" x="77.8" y="91.9" width="12.3" height="168.1" rx="1.5"><title>2♦: 122</title></rect>
+<rect class="bar" x="96.9" y="68.5" width="12.3" height="191.5" rx="1.5"><title>2♣: 139</title></rect>
+<rect class="bar" x="116.1" y="65.7" width="12.3" height="194.3" rx="1.5"><title>3♠: 141</title></rect>
+<rect class="bar red" x="135.2" y="97.4" width="12.3" height="162.6" rx="1.5"><title>3♥: 118</title></rect>
+<rect class="bar red" x="154.4" y="79.5" width="12.3" height="180.5" rx="1.5"><title>3♦: 131</title></rect>
+<rect class="bar" x="173.5" y="75.4" width="12.3" height="184.6" rx="1.5"><title>3♣: 134</title></rect>
+<rect class="bar" x="192.7" y="68.5" width="12.3" height="191.5" rx="1.5"><title>4♠: 139</title></rect>
+<rect class="bar red" x="211.8" y="87.8" width="12.3" height="172.2" rx="1.5"><title>4♥: 125</title></rect>
+<rect class="bar red" x="231.0" y="83.6" width="12.3" height="176.4" rx="1.5"><title>4♦: 128</title></rect>
+<rect class="bar" x="250.1" y="79.5" width="12.3" height="180.5" rx="1.5"><title>4♣: 131</title></rect>
+<rect class="bar" x="269.3" y="116.7" width="12.3" height="143.3" rx="1.5"><title>5♠: 104</title></rect>
+<rect class="bar red" x="288.4" y="93.3" width="12.3" height="166.7" rx="1.5"><title>5♥: 121</title></rect>
+<rect class="bar red" x="307.6" y="54.7" width="12.3" height="205.3" rx="1.5"><title>5♦: 149</title></rect>
+<rect class="bar" x="326.8" y="75.4" width="12.3" height="184.6" rx="1.5"><title>5♣: 134</title></rect>
+<rect class="bar" x="345.9" y="90.5" width="12.3" height="169.5" rx="1.5"><title>6♠: 123</title></rect>
+<rect class="bar red" x="365.1" y="63.0" width="12.3" height="197.0" rx="1.5"><title>6♥: 143</title></rect>
+<rect class="bar red" x="384.2" y="86.4" width="12.3" height="173.6" rx="1.5"><title>6♦: 126</title></rect>
+<rect class="bar" x="403.4" y="91.9" width="12.3" height="168.1" rx="1.5"><title>6♣: 122</title></rect>
+<rect class="bar" x="422.5" y="109.8" width="12.3" height="150.2" rx="1.5"><title>7♠: 109</title></rect>
+<rect class="bar red" x="441.7" y="76.8" width="12.3" height="183.2" rx="1.5"><title>7♥: 133</title></rect>
+<rect class="bar red" x="460.8" y="102.9" width="12.3" height="157.1" rx="1.5"><title>7♦: 114</title></rect>
+<rect class="bar" x="480.0" y="78.1" width="12.3" height="181.9" rx="1.5"><title>7♣: 132</title></rect>
+<rect class="bar" x="499.1" y="96.0" width="12.3" height="164.0" rx="1.5"><title>8♠: 119</title></rect>
+<rect class="bar red" x="518.3" y="85.0" width="12.3" height="175.0" rx="1.5"><title>8♥: 127</title></rect>
+<rect class="bar red" x="537.4" y="63.0" width="12.3" height="197.0" rx="1.5"><title>8♦: 143</title></rect>
+<rect class="bar" x="556.6" y="56.1" width="12.3" height="203.9" rx="1.5"><title>8♣: 148</title></rect>
+<rect class="bar" x="575.8" y="83.6" width="12.3" height="176.4" rx="1.5"><title>9♠: 128</title></rect>
+<rect class="bar red" x="594.9" y="58.8" width="12.3" height="201.2" rx="1.5"><title>9♥: 146</title></rect>
+<rect class="bar red" x="614.1" y="71.2" width="12.3" height="188.8" rx="1.5"><title>9♦: 137</title></rect>
+<rect class="bar" x="633.2" y="82.3" width="12.3" height="177.7" rx="1.5"><title>9♣: 129</title></rect>
+<rect class="bar" x="652.4" y="74.0" width="12.3" height="186.0" rx="1.5"><title>10♠: 135</title></rect>
+<rect class="bar red" x="671.5" y="39.6" width="12.3" height="220.4" rx="1.5"><title>10♥: 160</title></rect>
+<rect class="bar red" x="690.7" y="68.5" width="12.3" height="191.5" rx="1.5"><title>10♦: 139</title></rect>
+<rect class="bar" x="709.8" y="94.7" width="12.3" height="165.3" rx="1.5"><title>10♣: 120</title></rect>
+<rect class="bar" x="729.0" y="80.9" width="12.3" height="179.1" rx="1.5"><title>J♠: 130</title></rect>
+<rect class="bar red" x="748.1" y="105.7" width="12.3" height="154.3" rx="1.5"><title>J♥: 112</title></rect>
+<rect class="bar red" x="767.3" y="75.4" width="12.3" height="184.6" rx="1.5"><title>J♦: 134</title></rect>
+<rect class="bar" x="786.4" y="94.7" width="12.3" height="165.3" rx="1.5"><title>J♣: 120</title></rect>
+<rect class="bar" x="805.6" y="104.3" width="12.3" height="155.7" rx="1.5"><title>Q♠: 113</title></rect>
+<rect class="bar red" x="824.8" y="63.0" width="12.3" height="197.0" rx="1.5"><title>Q♥: 143</title></rect>
+<rect class="bar red" x="843.9" y="97.4" width="12.3" height="162.6" rx="1.5"><title>Q♦: 118</title></rect>
+<rect class="bar" x="863.1" y="67.1" width="12.3" height="192.9" rx="1.5"><title>Q♣: 140</title></rect>
+<rect class="bar" x="882.2" y="83.6" width="12.3" height="176.4" rx="1.5"><title>K♠: 128</title></rect>
+<rect class="bar red" x="901.4" y="42.3" width="12.3" height="217.7" rx="1.5"><title>K♥: 158</title></rect>
+<rect class="bar red" x="920.5" y="78.1" width="12.3" height="181.9" rx="1.5"><title>K♦: 132</title></rect>
+<rect class="bar" x="939.7" y="85.0" width="12.3" height="175.0" rx="1.5"><title>K♣: 127</title></rect>
+<rect class="bar" x="958.8" y="120.8" width="12.3" height="139.2" rx="1.5"><title>A♠: 101</title></rect>
+<rect class="bar red" x="978.0" y="86.4" width="12.3" height="173.6" rx="1.5"><title>A♥: 126</title></rect>
+<rect class="bar red" x="997.1" y="89.2" width="12.3" height="170.8" rx="1.5"><title>A♦: 124</title></rect>
+<rect class="bar" x="1016.3" y="102.9" width="12.3" height="157.1" rx="1.5"><title>A♣: 114</title></rect>
+<text class="axis rank" x="74.3" y="278" text-anchor="middle">2</text>
+<text class="axis rank" x="150.9" y="278" text-anchor="middle">3</text>
+<text class="axis rank" x="227.5" y="278" text-anchor="middle">4</text>
+<text class="axis rank" x="304.2" y="278" text-anchor="middle">5</text>
+<text class="axis rank" x="380.8" y="278" text-anchor="middle">6</text>
+<text class="axis rank" x="457.4" y="278" text-anchor="middle">7</text>
+<text class="axis rank" x="534.0" y="278" text-anchor="middle">8</text>
+<text class="axis rank" x="610.6" y="278" text-anchor="middle">9</text>
+<text class="axis rank" x="687.2" y="278" text-anchor="middle">10</text>
+<text class="axis rank" x="763.8" y="278" text-anchor="middle">J</text>
+<text class="axis rank" x="840.5" y="278" text-anchor="middle">Q</text>
+<text class="axis rank" x="917.1" y="278" text-anchor="middle">K</text>
+<text class="axis rank" x="993.7" y="278" text-anchor="middle">A</text>
+<line class="expected" x1="36" x2="1032" y1="81.9" y2="81.9"/>
+<text class="axis exp-label" x="1032" y="75.9" text-anchor="end">expected 129.3</text>
+</svg>
+                    <div class="dist-legend">
+                        <span><i style="background: #a5b4fc"></i>♠ ♣</span>
+                        <span><i style="background: var(--red)"></i>♥ ♦</span>
+                        <span>Bars grouped by rank, ♠ ♥ ♦ ♣ within each. Dashed line: expected count, 6,723 ÷ 52.</span>
+                    </div>
+                </div>
+                <div class="chi">
+                    <div><span class="pass">PASS</span><b>Cards</b><span>χ² = 60.5 · df 51 · p = 0.17</span></div>
+                    <div><span class="pass">PASS</span><b>Suits</b><span>χ² = 6.9 · df 3 · p = 0.08</span></div>
+                    <div><span class="pass">PASS</span><b>Ranks</b><span>χ² = 14.0 · df 12 · p = 0.30</span></div>
+                </div>
+                <p class="dist-note">
+                    Snapshot of 31 Oct 2026: 1,910 completed hands across 53 tables. Chi-squared goodness-of-fit against a uniform deck;
+                    p &gt; 0.05 means no evidence of bias. Live numbers on the <a href="https://app.block52.xyz/explorer/distribution">explorer</a>.
+                </p>
+            </div>
+        </section>
 
         <section class="block" id="how">
             <div class="wrap">
@@ -1083,9 +1618,12 @@
                     </div>
                     <div class="format">
                         <span class="big-suit" aria-hidden="true" style="color: var(--red)">♦</span>
-                        <span class="tag soon">Coming</span>
+                        <span class="tag">Live</span>
                         <h3>Tournaments</h3>
-                        <p>Multi-table tournaments with table balancing, run by the chain from first hand to final table.</p>
+                        <p>
+                            Scheduled tournaments with a set start time, late registration and blinds on a clock. Places are paid automatically.
+                            Next: multi-table tournaments with table balancing, run by the chain to the final table.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1123,23 +1661,14 @@
             </div>
         </section>
 
-        <section class="final">
-            <div class="wrap">
-                <h2>Your seat is <em class="grad-text">open.</em></h2>
-                <p>Make a wallet in seconds. No email, no username.</p>
-                <div class="hero-ctas">
-                    <a class="btn btn-primary" href="https://app.block52.xyz">Play now <span aria-hidden="true">→</span></a>
-                    <a class="btn btn-ghost" href="https://app.block52.xyz/explorer">Explore the chain</a>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer>
         <div class="wrap">
             <div class="brand">
-                <img src="/logo.svg" alt="Block52" width="96" height="22" />
+                <img src="/logo-wordmark.png" alt="Block52" width="131" height="28" />
                 <p>Poker on its own blockchain.</p>
+                <p><a href="https://x.com/block52xyz" rel="me">Follow @block52xyz on X →</a></p>
             </div>
             <div>
                 <h4>Play</h4>
@@ -1161,6 +1690,7 @@
                 <h4>Build</h4>
                 <ul>
                     <li><a href="https://github.com/block52">GitHub</a></li>
+                    <li><a href="https://x.com/block52xyz" rel="me">X / Twitter</a></li>
                     <li><a href="https://ninehighstudios.com">Nine High Studios</a></li>
                 </ul>
             </div>
